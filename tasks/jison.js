@@ -22,29 +22,34 @@ module.exports = function(grunt) {
   var jison = require('jison');
 
   grunt.registerMultiTask('jison', 'jison parser generator', function() {
-	var src = this.data.file.src;
-	var dest = this.data.file.dest;
 	
-    if (!src) {	
-		grunt.warn('Missing src property.');
-		return false;
-	}
+	var type = this.data.type || "commonjs";
+	
+	this.files.forEach(function(f) {
+		
+		var src = f.src.shift();
+		var dest = f.dest;
+	
+		if (!src) {	
+			grunt.warn('Missing src property.');
+			return false;
+		}
 
-    if (!dest) {
-		grunt.warn('Missing dest property');
-		return false;
-    }
-	try {
-		var data = file.read(src);
-		var parser = new jison.Parser(data);
-        var js = parser.generate();
-		file.write(dest, js);
-		return true;
-	} catch (e) {
-		grunt.warn(e);
-		return false;
-	}
-     
+		if (!dest) {
+			grunt.warn('Missing dest property');
+			return false;
+		}
+		try {
+			var data = file.read(src);
+			var parser = new jison.Parser(data);
+			var js = parser.generate({moduleType: type});
+			file.write(dest, js);
+			return true;
+		} catch (e) {
+			grunt.warn(e);
+			return false;
+		}
+    }); 
   });
 
   

@@ -31,9 +31,10 @@ module.exports = function(grunt) {
     // Configuration to be run (and then tested).
     jison: {
 		target : {
-			file : {
-				src : 'test/fixtures/calc.jison',
-				dest: 'tmp/calc.js'
+			type : 'commonjs', // "commonjs" || "js" || "amd"
+			files : {
+				'tmp/calc.js' : 'test/fixtures/calc.jison',
+				
 			}	
 		}
 	},
