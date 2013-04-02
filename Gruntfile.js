@@ -30,10 +30,24 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     jison: {
-		target : {
+		commonjs : {
 			type : 'commonjs', // "commonjs" || "js" || "amd"
 			files : {
-				'tmp/calc.js' : 'test/fixtures/calc.jison',
+				'tmp/commonjs.calc.js' : 'test/fixtures/calc.jison',
+				
+			}	
+		},
+		js : {
+			type : 'js', // "commonjs" || "js" || "amd"
+			files : {
+				'tmp/js.calc.js' : 'test/fixtures/calc.jison',
+				
+			}	
+		},
+		amd : {
+			type : 'amd', // "commonjs" || "js" || "amd"
+			files : {
+				'tmp/amd.calc.js' : 'test/fixtures/calc.jison',
 				
 			}	
 		}

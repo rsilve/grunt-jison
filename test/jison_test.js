@@ -27,11 +27,29 @@ exports.jison = {
     // setup here if necessary
     done();
   },
-  target: function(test) {
+  js: function(test) {
     test.expect(1);
 
-    var actual = grunt.file.read('tmp/calc.js');
-    var expected = grunt.file.read('test/expected/calc.js');
+    var actual = grunt.file.read('tmp/js.calc.js');
+    var expected = grunt.file.read('test/expected/js.calc.js');
+    test.equal(actual, expected, 'should describe what the default behavior is.');
+
+    test.done();
+  },
+  amd: function(test) {
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/amd.calc.js');
+    var expected = grunt.file.read('test/expected/amd.calc.js');
+    test.equal(actual, expected, 'should describe what the default behavior is.');
+
+    test.done();
+  },
+  commonjs: function(test) {
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/commonjs.calc.js');
+    var expected = grunt.file.read('test/expected/commonjs.calc.js');
     test.equal(actual, expected, 'should describe what the default behavior is.');
 
     test.done();
