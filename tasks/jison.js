@@ -44,6 +44,7 @@ module.exports = function(grunt) {
 			var parser = new jison.Parser(data);
 			var js = parser.generate({moduleType: type});
 			file.write(dest, js);
+			grunt.log.oklns("generate "+dest);	
 			return true;
 		} catch (e) {
 			grunt.warn(e);
