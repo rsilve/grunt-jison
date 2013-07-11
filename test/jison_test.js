@@ -36,7 +36,7 @@ exports.jison = {
 
     test.done();
   },
-  amd: function(test) {
+/*  amd: function(test) {
     test.expect(1);
 
     var actual = grunt.file.read('tmp/amd.calc.js');
@@ -44,7 +44,7 @@ exports.jison = {
     test.equal(actual, expected, 'should describe what the default behavior is.');
 
     test.done();
-  },
+  }, /* */
   commonjs: function(test) {
     test.expect(1);
 

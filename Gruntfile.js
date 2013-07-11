@@ -44,13 +44,13 @@ module.exports = function(grunt) {
 				
 			}	
 		},
-		amd : {
+		/* amd : {
 			type : 'amd', // "commonjs" || "js" || "amd"
 			files : {
 				'tmp/amd.calc.js' : 'test/fixtures/calc.jison',
 				
 			}	
-		}
+		} /* */
 	},
 
     // Unit tests.
