@@ -1,7 +1,7 @@
 {
   "name": "grunt-jison",
   "description": "grunt plugin for jison parser",
-  "version": "1.0.0-SNAPSHOT",
+  "version": "1.0.1",
   "homepage": "https://github.com/rsilve/grunt-jison",
   "author": {
     "name": "Robert silve",
@@ -32,7 +32,8 @@
     "grunt-contrib-clean": "~0.4.0",
     "grunt-contrib-nodeunit": "~0.1.2",
     "grunt": "~0.4.1",
-    "jison": "~0.4.2"
+    "jison": "~0.4.2",
+    "grunt-release": "~0.3.5"
   },
   "peerDependencies": {
     "grunt": "~0.4.1"
