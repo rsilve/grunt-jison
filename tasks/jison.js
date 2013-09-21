@@ -23,7 +23,7 @@ module.exports = function(grunt) {
 
   grunt.registerMultiTask('jison', 'jison parser generator', function() {
 	
-	var type = this.data.type || "commonjs";
+	var options = this.options({"moduleType": this.data.type || "commonjs"});
 	
 	this.files.forEach(function(f) {
 		
@@ -41,8 +41,8 @@ module.exports = function(grunt) {
 		}
 		try {
 			var data = file.read(src);
-			var parser = new jison.Parser(data);
-			var js = parser.generate({moduleType: type});
+			var parser = new jison.Generator(data, options);
+			var js = parser.generate(options);
 			file.write(dest, js);
 			grunt.log.oklns("generate "+dest);	
 			return true;
