@@ -1,7 +1,7 @@
 {
   "name": "grunt-jison",
   "description": "grunt plugin for jison parser",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "homepage": "https://github.com/rsilve/grunt-jison",
   "author": {
     "name": "Robert silve",
