@@ -30,28 +30,31 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     jison: {
-		commonjs : {
-			type : 'commonjs', // "commonjs" || "js" || "amd"
-			files : {
-				'tmp/commonjs.calc.js' : 'test/fixtures/calc.jison',
-				
-			}	
-		},
-		js : {
-			type : 'js', // "commonjs" || "js" || "amd"
-			files : {
-				'tmp/js.calc.js' : 'test/fixtures/calc.jison',
-				
-			}	
-		},
-		/* amd : {
-			type : 'amd', // "commonjs" || "js" || "amd"
-			files : {
-				'tmp/amd.calc.js' : 'test/fixtures/calc.jison',
-				
-			}	
-		} /* */
-	},
+      commonjs : {
+        options: {
+          moduleType : 'commonjs',
+        },
+        files : {
+          'tmp/commonjs.calc.js' : 'test/fixtures/calc.jison',
+        }
+      },
+      js : {
+        options: {
+          moduleType : 'js',
+        },
+        files : {
+          'tmp/js.calc.js' : 'test/fixtures/calc.jison',
+        }
+      },
+      amd : {
+        options: {
+          moduleType : 'amd',
+        },
+        files : {
+          'tmp/amd.calc.js' : 'test/fixtures/calc.jison',
+        }
+      }
+    },
 
     // Unit tests.
     nodeunit: {
