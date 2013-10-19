@@ -25,13 +25,15 @@ In your project's Gruntfile, add a section named `jison` to the data object pass
 ```js
 grunt.initConfig({
   jison: {
-    options: {
-      // Task-specific options go here.
-    },
-    your_target: {
-      // Target-specific file lists and/or options go here.
-    },
-  },
+    target : {
+    	options: {
+      	// Task-specific options go here.
+    	},
+    	files: {
+      	// Target-specific file lists and/or options go here.
+    	}
+     }
+  }
 })
 ```
 
@@ -52,11 +54,10 @@ Possible values are `commonjs`, `js` and `amd`.
 ```js
 grunt.initConfig({
   jison: {
-    options: {},
-    files: {
-      'generated-parser.js': 'grammar-file.jison,
-    },
-  },
+    my_parser : {
+    	files: {'generated-parser.js': 'grammar-file.jison}
+    }
+  }
 })
 ```
 
@@ -66,13 +67,11 @@ In this example, we generate a AMD module instead of a standard JS file.
 ```js
 grunt.initConfig({
   jison: {
-    options: {
-      moduleType: 'amd'
-    },
-    files: {
-      'generated-parser.amd.js': 'grammar-file.jison,
-    },
-  },
+  	target : {
+    	options: { moduleType: 'amd' },
+    	files: { 'generated-parser.amd.js': 'grammar-file.jison }
+    }
+  }
 })
 ```
 
