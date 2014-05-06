@@ -55,7 +55,7 @@ Possible values are `commonjs`, `js` and `amd`.
 grunt.initConfig({
   jison: {
     my_parser : {
-    	files: {'generated-parser.js': 'grammar-file.jison}
+    	files: { 'generated-parser.js': 'grammar-file.jison' }
     }
   }
 })
@@ -69,7 +69,7 @@ grunt.initConfig({
   jison: {
   	target : {
     	options: { moduleType: 'amd' },
-    	files: { 'generated-parser.amd.js': 'grammar-file.jison }
+    	files: { 'generated-parser.amd.js': 'grammar-file.jison' }
     }
   }
 })
