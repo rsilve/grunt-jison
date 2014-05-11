@@ -53,6 +53,11 @@ module.exports = function(grunt) {
         files : {
           'tmp/amd.calc.js' : 'test/fixtures/calc.jison',
         }
+      },
+      withLexFile: {
+        files : {
+          'tmp/withLexFile.calc.js' : ['test/fixtures/calc_grammar.jison', 'test/fixtures/calc_lex.jisonlex' ]
+        }
       }
     },
 

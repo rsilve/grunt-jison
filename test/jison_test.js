@@ -54,5 +54,14 @@ exports.jison = {
 
     test.done();
   },
+  withLexFile: function(test) {
+    test.expect(1);
+
+    var actual = grunt.file.read('tmp/withLexFile.calc.js');
+    var expected = grunt.file.read('test/expected/withLexFile.calc.js');
+    test.equal(actual, expected, 'should describe what the default behavior is.');
+
+    test.done();
+  }
  
 };
