@@ -8,7 +8,9 @@
 
 'use strict';
 
+
 module.exports = function(grunt) {
+
   var task = grunt.task;
   var file = grunt.file;
   var utils = grunt.utils;
@@ -19,13 +21,18 @@ module.exports = function(grunt) {
   var config = grunt.config;
   var template = grunt.template;
 
+  var jison = require('jison');
+  var ebnfParser = require('ebnf-parser');
+  var lexParser  = require('lex-parser');
+
+
   grunt.registerMultiTask('jison', 'jison parser generator', function() {
-	
-	var options = this.options({"moduleType": this.data.type || "commonjs"});
-	options["module-type"] = options.moduleType;
+
+  var options = this.options({"moduleType" : "commonjs", "moduleParser": "lalr"});
 
 	this.files.forEach(function(f) {
-		
+
+
 		var src = f.src.shift();
 		var dest = f.dest;
 
@@ -39,78 +46,27 @@ module.exports = function(grunt) {
 			return false;
 		}
 
-		options.file = src;
-		options.lexfile = f.src.shift();
-		options.outfile = dest;
 
 		try {
-			json_cli_main(options);
-			grunt.log.oklns("generate "+dest);
+      var data = file.read(src);
+      var grammar = ebnfParser.parse(data);
+      var lex = f.src.shift();
+      if (lex) {
+        var lexFile = file.read(lex);
+        var lexOpts = lexParser.parse(lexFile);
+        grammar.lex = lexOpts;
+      }
+      var parser = new jison.Generator(grammar, options);
+      var js = parser.generate(options);
+      file.write(dest, js);
+      grunt.log.oklns("generate "+dest);
 			return true;
 		} catch (e) {
-			grunt.warn(e);
+      grunt.warn(e);
 			return false;
 		}
-    }); 
+    });
   });
 
-  
+
 };
-
-// functions taken from jison cli.js - to be removed once jison Generator constructor is enhanced
-
-function json_cli_main(opts) {
-  var fs = require('fs');
-  var path = require('path');
-
-  var raw = fs.readFileSync(path.normalize(opts.file), 'utf8');
-  var jsonMode = path.extname(opts.file) === '.json' || opts.json;
-  var name = path.basename((opts.outfile||opts.file)).replace(/\..*$/g,'');
-  var lex;
-
-  if (opts.lexfile) {
-    lex = fs.readFileSync(path.normalize(opts.lexfile), 'utf8');
-  }
-
-  fs.writeFileSync(opts.outfile||(name + '.js'), processGrammar(opts, raw, lex, name, jsonMode));
-}
-
-function processGrammar (opts, file, lexFile, name, jsonMode) {
-  var ebnfParser = require('ebnf-parser');
-  var lexParser  = require('lex-parser');
-  var cjson      = require('cjson');
-  var jison = require('jison');
-
-  var grammar;
-  if (jsonMode) {
-    grammar = cjson.parse(file);
-  } else {
-    // otherwise, attempt to parse jison format
-    // fallback to JSON
-    try {
-      grammar = ebnfParser.parse(file);
-    } catch (e) {
-      try {
-        grammar = cjson.parse(file);
-      } catch (e2) {
-        throw e;
-      }
-    }
-  }
-
-  var settings = grammar.options || {};
-
-  if (opts['parser-type']) settings.type = opts['parser-type'];
-  if (lexFile) grammar.lex = lexParser.parse(lexFile);
-  settings.debug = opts.debug;
-  if (!settings.moduleType) settings.moduleType = opts['module-type'];
-  if (!settings.moduleName && name) {
-    settings.moduleName = name.replace(/-\w/g,
-      function (match){
-        return match.charAt(1).toUpperCase();
-      });
-  }
-
-  var generator = new jison.Generator(grammar, settings);
-  return generator.generate(settings);
-}

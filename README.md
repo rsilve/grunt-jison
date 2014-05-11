@@ -3,7 +3,7 @@
 > grunt plugin for jison parser
 
 ## Getting Started
-This plugin requires Grunt `~0.4.1`
+This plugin requires Grunt `~0.4.4`
 
 If you haven't used [Grunt](http://gruntjs.com/) before, be sure to check out the [Getting Started](http://gruntjs.com/getting-started) guide, as it explains how to create a [Gruntfile](http://gruntjs.com/sample-gruntfile) as well as install and use Grunt plugins. Once you're familiar with that process, you may install this plugin with this command:
 
@@ -43,8 +43,15 @@ grunt.initConfig({
 Type: `String`
 Default value: `commonjs`
 
-The type of module you want to generate with Jison.   
+The type of module you want to generate with Jison.
 Possible values are `commonjs`, `js` and `amd`.
+
+#### options.moduleParser
+Type: `String`
+Default value: `lalr`
+
+The type of algorithm to use for the parser.
+Possible values are `lr0`, `slr`, `lalr`, `lr.
 
 
 ### Usage Examples
@@ -67,9 +74,23 @@ In this example, we generate a AMD module instead of a standard JS file.
 ```js
 grunt.initConfig({
   jison: {
-  	target : {
-    	options: { moduleType: 'amd' },
-    	files: { 'generated-parser.amd.js': 'grammar-file.jison' }
+    target : {
+      options: { moduleType: 'amd' },
+      files: { 'generated-parser.amd.js': 'grammar-file.jison' }
+    }
+  }
+})
+```
+#### Optional lex file
+In this example, we generate a module with a file containing a grammar and a
+file containing a lexical grammar.
+
+```js
+grunt.initConfig({
+  jison: {
+    target : {
+      options: { moduleType: 'amd' },
+      files: { 'generated-parser.amd.js': ['grammar-file.jison',  'lex-file.jisonlex'}
     }
   }
 })

@@ -16,45 +16,48 @@ module.exports = function(grunt) {
       all: [
         'Gruntfile.js',
         'tasks/*.js',
-        '<%= nodeunit.tests %>',
+        '<%= nodeunit.tests %>'
       ],
       options: {
-        jshintrc: '.jshintrc',
-      },
+        jshintrc: '.jshintrc'
+      }
     },
 
     // Before generating any new files, remove any previously-created files.
     clean: {
-      tests: ['tmp'],
+      tests: ['tmp']
     },
 
     // Configuration to be run (and then tested).
     jison: {
       commonjs : {
         options: {
-          moduleType : 'commonjs',
+          moduleType : 'commonjs'
         },
         files : {
-          'tmp/commonjs.calc.js' : 'test/fixtures/calc.jison',
+          'tmp/commonjs.calc.js' : 'test/fixtures/calc.jison'
         }
       },
       js : {
         options: {
-          moduleType : 'js',
+          moduleType : 'js'
         },
         files : {
-          'tmp/js.calc.js' : 'test/fixtures/calc.jison',
+          'tmp/js.calc.js' : 'test/fixtures/calc.jison'
         }
       },
       amd : {
         options: {
-          moduleType : 'amd',
+          moduleType : 'amd'
         },
         files : {
-          'tmp/amd.calc.js' : 'test/fixtures/calc.jison',
+          'tmp/amd.calc.js' : 'test/fixtures/calc.jison'
         }
       },
       withLexFile: {
+        options: {
+          moduleParser : 'lalr'
+        },
         files : {
           'tmp/withLexFile.calc.js' : ['test/fixtures/calc_grammar.jison', 'test/fixtures/calc_lex.jisonlex' ]
         }
@@ -63,8 +66,8 @@ module.exports = function(grunt) {
 
     // Unit tests.
     nodeunit: {
-      tests: ['test/*_test.js'],
-    },
+      tests: ['test/*_test.js']
+    }
 
   });
 
