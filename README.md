@@ -53,6 +53,12 @@ Default value: `lalr`
 The type of algorithm to use for the parser.
 Possible values are `lr0`, `slr`, `lalr`, `lr.
 
+#### options.moduleName
+Type: `String`
+Default value: `parser`
+
+When using `js` for `options.moduleType`, specifies the
+variable name of the parser.  
 
 ### Usage Examples
 
