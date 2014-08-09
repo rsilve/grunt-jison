@@ -1,4 +1,4 @@
-# grunt-jison
+# grunt-jison  [![Build Status](https://travis-ci.org/rsilve/grunt-jison.svg?branch=master)](https://travis-ci.org/rsilve/grunt-jison)
 
 > grunt plugin for jison parser
 
